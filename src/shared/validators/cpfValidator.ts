@@ -1,10 +1,50 @@
 import {z} from "zod";
+import {removeSpecialCharacters} from "../utils/remove-special-characters.ts";
 
 export const cpfValidator = () => {
-    return z.string().refine(value => {
-        if (value.trim() === '') return false;
-        const cpfRegex = /^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$/;
-        return cpfRegex.test(value);
+    return z.string().refine((cpf): boolean => {
+        if (!cpf) return false;
+        cpf = removeSpecialCharacters(cpf);
+        if(cpf.length < 11) {
+            return false;
+        }
+        if (
+            cpf == "00000000000" ||
+            cpf == "11111111111" ||
+            cpf == "22222222222" ||
+            cpf == "33333333333" ||
+            cpf == "44444444444" ||
+            cpf == "55555555555" ||
+            cpf == "66666666666" ||
+            cpf == "77777777777" ||
+            cpf == "88888888888" ||
+            cpf == "99999999999"
+        ){
+            return false;
+        }
+        let add = 0;
+        for (var i = 0; i < 9; i++){
+            add += parseInt(cpf.charAt(i)) * (10 - i);
+        }
+        rev = 11 - (add % 11);
+        if (rev == 10 || rev == 11) {
+            rev = 0;
+        }
+        if (rev != parseInt(cpf.charAt(9))) {
+            return false;
+        }
+        add = 0;
+        for (i = 0; i < 10; i++) {
+            add += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+        var rev = 11 - (add % 11);
+        if (rev == 10 || rev == 11) {
+            rev = 0;
+        }
+        if (rev != parseInt(cpf.charAt(10))) {
+            return false;
+        }
+        return true;
     }, {
         message: 'CPF inválido',
     });

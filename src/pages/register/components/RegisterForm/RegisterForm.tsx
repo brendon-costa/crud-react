@@ -1,4 +1,4 @@
-import {FunctionComponent} from "react";
+import {FunctionComponent, useEffect} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -10,12 +10,16 @@ interface IRegisterForm {
     handleSave: (valueForm: IRegisterFormValue) => void;
     handleClose: () => void;
     open: boolean;
+    modalType: 'create' | 'edit';
+    editItemValue: IRegisterFormValue,
 }
 
 export const RegisterForm: FunctionComponent<IRegisterForm> = ({
     handleSave,
     handleClose,
     open,
+    modalType,
+    editItemValue,
 }) => {
     const {
         register,
@@ -23,17 +27,33 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
         watch,
         formState: { errors },
         setValue,
-        trigger
+        trigger,
+        reset,
     } = useForm<IRegisterFormValue>({
         resolver: zodResolver(registerSchema),
         mode: 'onBlur'
     });
     const onSubmit: SubmitHandler<IRegisterFormValue> = (data) => handleSave(data);
 
+    useEffect(() => {
+        if (modalType == 'edit' && open) {
+            setValue('name', editItemValue.name);
+            setValue('cpf', editItemValue.cpf);
+            setValue('email', editItemValue.email);
+            setValue('phone', editItemValue.phone);
+            trigger().then();
+        }
+    }, [open]);
+
+    const closeAction = () => {
+        handleClose();
+        reset();
+    }
+
     return (
         <Dialog
             open={open}
-            onClose={handleClose}
+            onClose={closeAction}
             fullWidth={true}
             maxWidth="md"
         >
@@ -108,7 +128,7 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>
+                    <Button onClick={closeAction}>
                         Cancelar
                     </Button>
                     <Button type="submit">

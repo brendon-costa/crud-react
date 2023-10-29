@@ -1,17 +1,19 @@
 import {ColumnModel} from "../../model/column.model.ts";
 import {FunctionComponent} from "react";
-import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {DisplayMask} from "../DisplayMask/DisplayMask.tsx";
 
 
 interface ITable {
     dataList: any[];
     columns: ColumnModel[];
+    editHandle: (rowValue: any) => void;
 }
 
 export const ManagementTable: FunctionComponent<ITable> = ({
     dataList,
-    columns
+    columns,
+    editHandle,
 }) => {
     return (
         <TableContainer component={Paper}>
@@ -26,6 +28,9 @@ export const ManagementTable: FunctionComponent<ITable> = ({
                                 {column.label}
                             </TableCell>
                         ))}
+                        <TableCell>
+                            Ações
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -40,6 +45,17 @@ export const ManagementTable: FunctionComponent<ITable> = ({
                                         </TableCell>
                                     );
                                 })}
+                                <TableCell>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        size="small"
+                                        style={{ marginLeft: 16 }}
+                                        onClick={() => editHandle(row)}
+                                    >
+                                        Editar
+                                    </Button>
+                                </TableCell>
                             </TableRow>
                         );
                     })}

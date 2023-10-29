@@ -14,7 +14,11 @@ export const useRegisterList = (): any => {
             const fetchData = async () => {
                 try {
                     const response = await getRegisterListInApi();
-                    setRegisterList(response.data);
+                    const registerListWithId = response.data.map(item => {
+                        item.id = Math.random();
+                        return item;
+                    })
+                    setRegisterList(registerListWithId);
                     setError(false);
                 } catch (error) {
                     setError(true);
