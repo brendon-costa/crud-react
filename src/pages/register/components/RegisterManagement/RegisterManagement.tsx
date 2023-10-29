@@ -4,6 +4,7 @@ import {ColumnModel} from "../../../../shared/model/column.model.ts";
 import {ManagementTable} from "../../../../shared/components/Table/Table.tsx";
 import {Button} from "@mui/material";
 import {RegisterForm} from "../RegisterForm/RegisterForm.tsx";
+import {IRegisterFormValue} from "../../model/register-form.model.ts";
 
 export const RegisterManagement: FunctionComponent = () => {
     const [open, setOpen] = useState(false)
@@ -23,7 +24,7 @@ export const RegisterManagement: FunctionComponent = () => {
         setOpen(false);
     }
 
-    const saveForm = (valueForm) => {
+    const saveForm = (valueForm: IRegisterFormValue) => {
         console.log(valueForm);
     }
 
