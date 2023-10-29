@@ -82,7 +82,7 @@ export const RegisterManagement: FunctionComponent = () => {
             />
             <div className="flex justify-end mt-5">
                 <Button variant="contained" onClick={() => openForm('create')}>
-                    Criar Novo Registro +
+                    Criar Novo Registro
                 </Button>
             </div>
         </div>

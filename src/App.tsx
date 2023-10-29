@@ -12,7 +12,6 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Register />} />
-                    <Route path="/register-form" element={<Register />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

@@ -69,6 +69,7 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                                 className="w-full"
                                 label="Nome completo (sem abreviações)"
                                 variant="standard"
+                                name="name"
                                 error={!!errors?.name}
                                 helperText={errors?.name?.message}
                             />
@@ -79,6 +80,7 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                                 className="w-full"
                                 label="E-mail"
                                 variant="standard"
+                                name="email"
                                 error={!!errors?.email}
                                 helperText={errors?.email?.message}
                             />
@@ -98,6 +100,7 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                                         label="CPF"
                                         variant="standard"
                                         className="w-full"
+                                        name="cpf"
                                         error={!!errors?.cpf}
                                         helperText={errors?.cpf?.message}
                                     />
@@ -119,6 +122,7 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                                         label="Telefone"
                                         variant="standard"
                                         className="w-full"
+                                        name="phone"
                                         error={!!errors?.phone}
                                         helperText={errors?.phone?.message}
                                     />
@@ -128,10 +132,10 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={closeAction}>
+                    <Button onClick={closeAction} id="cancel-button">
                         Cancelar
                     </Button>
-                    <Button type="submit">
+                    <Button type="submit" id="save-button">
                         Salvar
                     </Button>
                 </DialogActions>
