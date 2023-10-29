@@ -2,7 +2,7 @@ import {FunctionComponent, useState} from "react";
 import {useRegisterList} from "../../hooks/useRegisterList.tsx";
 import {ColumnModel} from "../../../../shared/model/column.model.ts";
 import {ManagementTable} from "../../../../shared/components/Table/Table.tsx";
-import {Button} from "@mui/material";
+import {Button, Typography} from "@mui/material";
 import {RegisterForm} from "../RegisterForm/RegisterForm.tsx";
 import {IRegisterFormValue} from "../../model/register-form.model.ts";
 import {removeSpecialCharacters} from "../../../../shared/utils/remove-special-characters.ts";
@@ -34,6 +34,9 @@ export const RegisterManagement: FunctionComponent = () => {
 
     return (
         <div className="p-5 mt-5">
+            <Typography variant="h5" gutterBottom>
+                Gerenciamento de Registros
+            </Typography>
             <RegisterForm
                 open={open}
                 handleClose={closeForm}

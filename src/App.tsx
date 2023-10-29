@@ -2,23 +2,17 @@ import './App.css'
 import {Register} from "./pages/register";
 import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import {createTheme, CssBaseline, ThemeProvider} from "@mui/material";
-
-
-
-const darkTheme = createTheme({
-    palette: {
-        mode: 'dark',
-    },
-});
+import {CssBaseline, ThemeProvider} from "@mui/material";
+import {DarkTheme} from "./core/theme/theme.ts";
 
 function App() {
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={DarkTheme}>
             <CssBaseline />
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Register />} />
+                    <Route path="/register-form" element={<Register />} />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>

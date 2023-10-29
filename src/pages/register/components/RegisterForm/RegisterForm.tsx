@@ -1,25 +1,16 @@
 import {FunctionComponent} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import InputMask, { Props } from 'react-input-mask';
-import {phoneValidator} from "../../../../shared/validators/phoneValidator.ts";
-import {cpfValidator} from "../../../../shared/validators/cpfValidator.ts";
 import {IRegisterFormValue} from "../../model/register-form.model.ts";
+import {registerSchema} from "../../valitation-schema/register.schema.ts";
 
 interface IRegisterForm {
     handleSave: (valueForm: IRegisterFormValue) => void;
     handleClose: () => void;
     open: boolean;
 }
-
-const registerSchema = z.object({
-    name: z.string().min(3, { message: "Este campo precisa ter pelo menos 3 caracteres" }),
-    email: z.string().email({ message: "E-mail inválido" }),
-    phone: phoneValidator(),
-    cpf: cpfValidator(),
-});
 
 export const RegisterForm: FunctionComponent<IRegisterForm> = ({
     handleSave,
