@@ -1,21 +1,31 @@
 import {useEffect, useState} from "react";
-import {getRegisterList} from "../services/register.service.tsx";
 import {UserModel} from "../model/user.model.ts";
+import {
+    getRegisterListInApi,
+    getRegisterListInStorage,
+    setRegisterListInStorage
+} from "../services/register.service.tsx";
 
 export const useRegisterList = (): any => {
-    const [registerList, setRegisterList] = useState<UserModel[]>([]);
+    const [registerList, setRegisterList] = useState<UserModel[]>(getRegisterListInStorage());
     const [error, setError] = useState(false);
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await getRegisterList();
-                setRegisterList(response.data);
-                setError(false);
-            } catch (error) {
-                setError(true);
-            }
-        };
-        fetchData().then();
+        if (!registerList.length) {
+            const fetchData = async () => {
+                try {
+                    const response = await getRegisterListInApi();
+                    setRegisterList(response.data);
+                    setError(false);
+                } catch (error) {
+                    setError(true);
+                }
+            };
+            fetchData().then();
+        }
     }, []);
-    return {registerList, error};
+    useEffect(() => {
+        setRegisterListInStorage(registerList);
+    }, [registerList]);
+
+    return {registerList, setRegisterList, error};
 }

@@ -5,10 +5,11 @@ import {ManagementTable} from "../../../../shared/components/Table/Table.tsx";
 import {Button} from "@mui/material";
 import {RegisterForm} from "../RegisterForm/RegisterForm.tsx";
 import {IRegisterFormValue} from "../../model/register-form.model.ts";
+import {removeSpecialCharacters} from "../../../../shared/utils/remove-special-characters.ts";
 
 export const RegisterManagement: FunctionComponent = () => {
     const [open, setOpen] = useState(false)
-    const {registerList} = useRegisterList();
+    const {registerList, setRegisterList} = useRegisterList();
     const columns: ColumnModel[] = [
         { key: 'name', label: 'Nome', type: 'text', minWidth: 100 },
         { key: 'cpf', label: 'CPF', type: 'cpf', minWidth: 100 },
@@ -25,7 +26,10 @@ export const RegisterManagement: FunctionComponent = () => {
     }
 
     const saveForm = (valueForm: IRegisterFormValue) => {
-        console.log(valueForm);
+        valueForm.cpf = removeSpecialCharacters(valueForm.cpf);
+        valueForm.phone = removeSpecialCharacters(valueForm.phone);
+        setRegisterList((oldList: IRegisterFormValue[]) => [...oldList, ...[valueForm]]);
+        closeForm();
     }
 
     return (
