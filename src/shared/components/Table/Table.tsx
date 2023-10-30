@@ -2,6 +2,7 @@ import {ColumnModel} from "../../model/column.model.ts";
 import {FunctionComponent} from "react";
 import {Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {DisplayMask} from "../DisplayMask/DisplayMask.tsx";
+import EditIcon from '@mui/icons-material/Edit';
 
 
 interface ITable {
@@ -48,24 +49,28 @@ export const ManagementTable: FunctionComponent<ITable> = ({
                                     );
                                 })}
                                 <TableCell>
-                                    <Button
-                                        variant="outlined"
-                                        color="primary"
-                                        size="small"
-                                        style={{ marginLeft: 16 }}
-                                        onClick={() => editHandle(row)}
-                                    >
-                                        Editar
-                                    </Button>
-                                    <Button
-                                        variant="outlined"
-                                        color="primary"
-                                        size="small"
-                                        style={{ marginLeft: 16 }}
-                                        onClick={() => deleteHandle(row)}
-                                    >
-                                        Delete
-                                    </Button>
+                                    <div className="mb-2">
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            size="small"
+                                            style={{ marginLeft: 16 }}
+                                            onClick={() => editHandle(row)}
+                                        >
+                                            Editar
+                                        </Button>
+                                    </div>
+                                    <div>
+                                        <Button
+                                            variant="outlined"
+                                            color="primary"
+                                            size="small"
+                                            style={{ marginLeft: 16 }}
+                                            onClick={() => deleteHandle(row)}
+                                        >
+                                            Deletar
+                                        </Button>
+                                    </div>
                                 </TableCell>
                             </TableRow>
                         );

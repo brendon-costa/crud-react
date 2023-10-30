@@ -4,7 +4,7 @@ export const DarkTheme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
-            main: '#00c8b3'
+            main: '#efeeed'
         }
     },
     components: {
@@ -19,6 +19,7 @@ export const DarkTheme = createTheme({
                         borderRadius: 50,
                         paddingLeft: '20px',
                         paddingRight: '20px',
+                        textTransform: 'none',
                         '&:hover': {
                             backgroundColor: '#03e0c6',
                         },

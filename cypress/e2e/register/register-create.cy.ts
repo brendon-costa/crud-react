@@ -2,7 +2,7 @@ import {fillForm, formValudValidMock} from "./register.mock";
 
 describe("Criação de um registro", () => {
     beforeEach(() => {
-        cy.visit('http://localhost:5173/');
+        cy.visit('/');
         cy.contains('Criar Novo Registro').click();
     })
     describe("Testando campos inválidos", () => {
@@ -67,10 +67,10 @@ describe("Criação de um registro", () => {
         it('Testando se o save é concluído e as informações exibidas na listagem', () => {
             fillForm('create');
             cy.get('#save-button').click();
-            cy.contains(formValudValidMock.nome);
-            cy.contains(formValudValidMock.cpfMask);
-            cy.contains(formValudValidMock.phoneMask);
-            cy.contains(formValudValidMock.email);
+            cy.contains(formValudValidMock.nome).should('exist');
+            cy.contains(formValudValidMock.cpfMask).should('exist');
+            cy.contains(formValudValidMock.phoneMask).should('exist');
+            cy.contains(formValudValidMock.email).should('exist');
         });
     });
 })

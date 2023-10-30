@@ -2,10 +2,10 @@ import {fillForm, formValudValidEditMock, formValudValidMock, resetForm} from ".
 
 describe("Edição de registro", () => {
     beforeEach(() => {
-        cy.visit('http://localhost:5173/');
+        cy.visit('/');
         cy.contains('Criar Novo Registro').click();
     })
-    it('Testando se a tela foi preenchida', () => {
+    it('Testando se a tela foi preenchida corretamente', () => {
         fillForm('create');
         cy.get('#save-button').click();
         cy.get('tbody tr').eq(3).within(() => {
@@ -16,7 +16,7 @@ describe("Edição de registro", () => {
         cy.get('input[name="cpf"]').should('have.value', formValudValidMock.cpfMask);
         cy.get('input[name="phone"]').should('have.value', formValudValidMock.phoneMask);
     });
-    it('Testando se capo editado foi salvo corretamente', () => {
+    it('Testando se item editado foi salvo corretamente', () => {
         fillForm('create');
         cy.get('#save-button').click();
         cy.get('tbody tr').eq(3).within(() => {
@@ -25,10 +25,10 @@ describe("Edição de registro", () => {
         resetForm();
         fillForm('edit');
         cy.get('#save-button').click();
-        cy.contains(formValudValidEditMock.nome);
-        cy.contains(formValudValidEditMock.cpfMask);
-        cy.contains(formValudValidEditMock.phoneMask);
-        cy.contains(formValudValidEditMock.email);
+        cy.contains(formValudValidEditMock.nome).should('exist');
+        cy.contains(formValudValidEditMock.cpfMask).should('exist');
+        cy.contains(formValudValidEditMock.phoneMask).should('exist');
+        cy.contains(formValudValidEditMock.email).should('exist');
     });
 })
 
