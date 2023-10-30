@@ -63,6 +63,11 @@ export const RegisterManagement: FunctionComponent = () => {
         openForm('edit')
     }
 
+    const deleteHandle = (rowValue: IRegisterFormValue) => {
+        const registerListNew = registerList.filter(register => register.id != rowValue.id);
+        setRegisterList(registerListNew);
+    }
+
     return (
         <div className="p-5 mt-5">
             <Typography variant="h5" gutterBottom>
@@ -79,6 +84,7 @@ export const RegisterManagement: FunctionComponent = () => {
                 dataList={registerList}
                 columns={columns}
                 editHandle={editHandle}
+                deleteHandle={deleteHandle}
             />
             <div className="flex justify-end mt-5">
                 <Button variant="contained" onClick={() => openForm('create')}>

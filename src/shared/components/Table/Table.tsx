@@ -8,12 +8,14 @@ interface ITable {
     dataList: any[];
     columns: ColumnModel[];
     editHandle: (rowValue: any) => void;
+    deleteHandle: (rowValue: any) => void;
 }
 
 export const ManagementTable: FunctionComponent<ITable> = ({
     dataList,
     columns,
     editHandle,
+    deleteHandle
 }) => {
     return (
         <TableContainer component={Paper}>
@@ -54,6 +56,15 @@ export const ManagementTable: FunctionComponent<ITable> = ({
                                         onClick={() => editHandle(row)}
                                     >
                                         Editar
+                                    </Button>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        size="small"
+                                        style={{ marginLeft: 16 }}
+                                        onClick={() => deleteHandle(row)}
+                                    >
+                                        Delete
                                     </Button>
                                 </TableCell>
                             </TableRow>

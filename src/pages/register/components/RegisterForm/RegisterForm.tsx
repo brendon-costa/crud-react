@@ -109,6 +109,7 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                         <div>
                             <InputMask
                                 mask="(99) 99999-9999"
+                                maskChar={null}
                                 value={watch('phone', '')}
                                 onChange={(event) => {
                                     setValue('phone', event.target.value);
