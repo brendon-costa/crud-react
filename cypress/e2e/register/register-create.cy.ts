@@ -1,13 +1,6 @@
-const formValudValidMock = {
-    cpf: '92655992008',
-    cpfMask: '926.559.920-08',
-    phone: '21980176933',
-    phoneMask: '(21) 98017-6933',
-    nome: 'Brendon Costa',
-    email: 'brendon.costa@dev.com',
-}
+import {fillForm, formValudValidMock} from "./register.mock";
 
-describe("Criação de uma inscrição", () => {
+describe("Criação de um registro", () => {
     beforeEach(() => {
         cy.visit('http://localhost:5173/');
         cy.contains('Criar Novo Registro').click();
@@ -60,7 +53,7 @@ describe("Criação de uma inscrição", () => {
 
     describe("Testando ação do botão cancelar", () => {
         it('Resetando após clicar no botão cancelar', () => {
-            fillForm();
+            fillForm('create');
             cy.get('#cancel-button').click();
             cy.contains('Criar Novo Registro').click();
             cy.get('input[name="name"]').should('have.value', '');
@@ -72,7 +65,7 @@ describe("Criação de uma inscrição", () => {
 
     describe("Testando ação do botão salve", () => {
         it('Testando se o save é concluído e as informações exibidas na listagem', () => {
-            fillForm();
+            fillForm('create');
             cy.get('#save-button').click();
             cy.contains(formValudValidMock.nome);
             cy.contains(formValudValidMock.cpfMask);
@@ -81,11 +74,4 @@ describe("Criação de uma inscrição", () => {
         });
     });
 })
-
-const fillForm = () => {
-    cy.get('input[name="name"]').type(formValudValidMock.nome);
-    cy.get('input[name="email"]').type(formValudValidMock.email);
-    cy.get('input[name="cpf"]').type(formValudValidMock.cpf);
-    cy.get('input[name="phone"]').type(formValudValidMock.phone);
-}
 

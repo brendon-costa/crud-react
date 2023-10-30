@@ -2,7 +2,7 @@ import {FunctionComponent, useEffect} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField} from "@mui/material";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import InputMask, { Props } from 'react-input-mask';
+import InputMask from 'react-input-mask';
 import {IRegisterFormValue} from "../../model/register-form.model.ts";
 import {registerSchema} from "../../valitation-schema/register.schema.ts";
 
@@ -94,9 +94,8 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                                 }}
                                 onBlur={() => {trigger('cpf').then()}}
                             >
-                                {(props: Props) => {return (
+                                {() => {return (
                                     <TextField
-                                        {...props}
                                         label="CPF"
                                         variant="standard"
                                         className="w-full"
@@ -116,9 +115,8 @@ export const RegisterForm: FunctionComponent<IRegisterForm> = ({
                                 }}
                                 onBlur={() => {trigger('phone').then()}}
                             >
-                                {(props: Props) => {return (
+                                {() => {return (
                                     <TextField
-                                        {...props}
                                         label="Telefone"
                                         variant="standard"
                                         className="w-full"

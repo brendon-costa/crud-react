@@ -10,8 +10,8 @@ import {removeSpecialCharacters} from "../../../../shared/utils/remove-special-c
 export const RegisterManagement: FunctionComponent = () => {
     const [open, setOpen] = useState(false)
     const {registerList, setRegisterList} = useRegisterList();
-    let [modalType, setModalType] = useState('create');
-    let [editItemValue, setEditItemValue] = useState<IRegisterFormValue>(null);
+    const [modalType, setModalType] = useState<'edit' | 'create'>('create');
+    const [editItemValue, setEditItemValue] = useState<IRegisterFormValue>(null);
     const columns: ColumnModel[] = [
         { key: 'name', label: 'Nome', type: 'text', minWidth: 100 },
         { key: 'cpf', label: 'CPF', type: 'cpf', minWidth: 100 },
@@ -39,7 +39,7 @@ export const RegisterManagement: FunctionComponent = () => {
     const editForm = (valueForm: IRegisterFormValue) => {
         valueForm.cpf = removeSpecialCharacters(valueForm.cpf);
         valueForm.phone = removeSpecialCharacters(valueForm.phone);
-        const registerListNew = registerList.map(register => {
+        const registerListNew = registerList.map((register: IRegisterFormValue) => {
             if (register.id == editItemValue.id) {
                 register = valueForm;
                 register.id = editItemValue?.id;
